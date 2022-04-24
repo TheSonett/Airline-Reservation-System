@@ -4,9 +4,17 @@
         <servlet-name>ControllerServlet</servlet-name>
         <servlet-class>mvc.controller.ControllerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>flightMasterServlet</servlet-name>
+        <servlet-class>mvc.controller.flightMasterServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/ControllerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>flightMasterServlet</servlet-name>
+        <url-pattern>/flightMasterServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

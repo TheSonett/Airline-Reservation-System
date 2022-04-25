@@ -5,12 +5,6 @@
 package mvc.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
-import java.text.ParseException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,21 +12,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import mvc.model.flightMaster;
+import mvc.model.FlightMaster;
 
 
 /**
  *
  * @author sonet
  */
-@WebServlet(name = "flightMasterServlet", urlPatterns = {"/flightMasterServlet"})
-public class flightMasterServlet extends HttpServlet {
+@WebServlet(name = "FlightMasterServlet", urlPatterns = {"/FlightMasterServlet"})
+public class FlightMasterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public flightMasterServlet() {
+    public FlightMasterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -64,7 +58,7 @@ public class flightMasterServlet extends HttpServlet {
         // TODO Auto-generated method stub
         doGet(request, response);
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+        
         
         // My Code Below
         try {
@@ -72,17 +66,15 @@ public class flightMasterServlet extends HttpServlet {
             String flight_name = request.getParameter("flight_name");
             String from_city = request.getParameter("from_city");
             String to_city = request.getParameter("to_city");
-            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyy-MM-dd");  
-            Date date_of_flight = (Date) dateFormatter.parse(request.getParameter("date_of_flight"));
-            DateFormat timeFormatter = new SimpleDateFormat("HH:MM:SS a");
-            Time departure_time = (Time) timeFormatter.parse(request.getParameter("departure_time"));
-            Time arrival_time = (Time) timeFormatter.parse(request.getParameter("arrival_time"));
-            Time flight_duration = (Time) timeFormatter.parse(request.getParameter("flight_duration"));
-            double ticket_price = Double.parseDouble(request.getParameter("ticket_price"));
+            String date_of_flight = request.getParameter("date_of_flight");
+            String departure_time = request.getParameter("departure_time");
+            String arrival_time = request.getParameter("arrival_time");
+            String flight_duration = request.getParameter("flight_duration");
+            float ticket_price = Float.parseFloat(request.getParameter("ticket_price"));
             int total_seats = Integer.parseInt(request.getParameter("total_seats"));
             int available_seats = Integer.parseInt(request.getParameter("available_seats"));
             
-            flightMaster flightObj = new flightMaster();
+            FlightMaster flightObj = new FlightMaster();
             flightObj.setFlight_no(flight_no);
             flightObj.setFlight_name(flight_name);
             flightObj.setFrom_city(from_city);
@@ -104,14 +96,14 @@ public class flightMasterServlet extends HttpServlet {
                 rd.forward(request, response);
             }
             
-        } catch(IOException | NumberFormatException | ParseException | ServletException ex) {
+        } catch(IOException | NumberFormatException | ServletException ex) {
             System.out.println("Exception occured inside doPost() method in flightMaterServlet.java file!!: " + ex.getMessage());
         }
         
     }
     
     public boolean getResult() {
-        flightMaster flightObj = new flightMaster();
+        FlightMaster flightObj = new FlightMaster();
         return flightObj.status();
     }
 }

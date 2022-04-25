@@ -1,173 +1,96 @@
 ----- Creating Database ----------
-
+mysql -h localhost -u root
 CREATE DATABASE AirlineServer;
 use AirlineServer;
 
 
-
 -------- Admin master --------------
 CREATE TABLE admin_master (
-    -> admin_id INT PRIMARY KEY,
-    -> admin_name VARCHAR(20),
-    -> admin_password VARCHAR(20)
-    -> )ENGINE=INNODB;
+    admin_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    admin_name VARCHAR(20),
+    admin_password VARCHAR(20)
+    ) ENGINE=INNODB;
 
-
- DESCRIBE admin_master;
-+----------------+-------------+------+-----+---------+-------+
-| Field          | Type        | Null | Key | Default | Extra |
-+----------------+-------------+------+-----+---------+-------+
-| admin_id       | int(11)     | NO   | PRI | NULL    |       |
-| admin_name     | varchar(20) | YES  |     | NULL    |       |
-| admin_password | varchar(20) | YES  |     | NULL    |       |
-+----------------+-------------+------+-----+---------+-------+
-
-
-INSERT INTO admin_master (admin_id, admin_name, admin_password) VALUES (1, 'admin', 'admin');
-
+DESCRIBE admin_master;
+DROP TABLE admin_master;
+INSERT INTO admin_master (admin_name, admin_password) VALUES ('admin', 'admin');
 SELECT * FROM admin_master;
-+----------+------------+----------------+
-| admin_id | admin_name | admin_password |
-+----------+------------+----------------+
-|        1 | admin      | admin          |
-+----------+------------+----------------+
-
--------- Payment master --------------
-CREATE TABLE payment_master (
-    -> card_no INT PRIMARY KEY,
-    -> card_holder_name VARCHAR(20),
-    -> expiry_date DATE,
-    -> cvv_no INT
-    -> )ENGINE=INNODB;
 
 
-DESCRIBE payment_master;
-+------------------+-------------+------+-----+---------+-------+
-| Field            | Type        | Null | Key | Default | Extra |
-+------------------+-------------+------+-----+---------+-------+
-| card_no          | int(11)     | NO   | PRI | NULL    |       |
-| card_holder_name | varchar(20) | YES  |     | NULL    |       |
-| expiry_date      | date        | YES  |     | NULL    |       |
-| cvv_no           | int(11)     | YES  |     | NULL    |       |
-+------------------+-------------+------+-----+---------+-------+
+
+-------- Card master --------------
+CREATE TABLE card_master (
+    card_id INT AUTO_INCREMENT PRIMARY KEY,
+    card_no INT,
+    card_holder_name VARCHAR(20),
+    expiry_date VARCHAR(10),
+    cvv_no INT
+    ) ENGINE=INNODB;
+
+
+DESCRIBE card_master;
+DROP TABLE card_master;
 
 
 -------- User master --------------
-
 CREATE TABLE user_master (
-    -> user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    -> user_name VARCHAR(20),
-    -> user_password VARCHAR(20),
-    -> mobile_no VARCHAR(12),
-    -> date_of_birth DATE,
-    -> address VARCHAR(40),
-    -> city VARCHAR(20),
-    -> state VARCHAR(10),
-    -> pincode VARCHAR(10)
-    -> )ENGINE=INNODB;
+    user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(20),
+    user_password VARCHAR(20),
+    mobile_no VARCHAR(12),
+    date_of_birth VARCHAR(10),
+    address VARCHAR(40),
+    city VARCHAR(20),
+    state VARCHAR(10),
+    pincode VARCHAR(10)
+    ) ENGINE=INNODB;
 
 DESCRIBE user_master;
-+---------------+-------------+------+-----+---------+----------------+
-| Field         | Type        | Null | Key | Default | Extra          |
-+---------------+-------------+------+-----+---------+----------------+
-| user_id       | int(11)     | NO   | PRI | NULL    | auto_increment |
-| user_name     | varchar(20) | YES  |     | NULL    |                |
-| user_password | varchar(20) | YES  |     | NULL    |                |
-| mobile_no     | varchar(12) | YES  |     | NULL    |                |
-| date_of_birth | date        | YES  |     | NULL    |                |
-| address       | varchar(40) | YES  |     | NULL    |                |
-| city          | varchar(20) | YES  |     | NULL    |                |
-| state         | varchar(10) | YES  |     | NULL    |                |
-| pincode       | varchar(10) | YES  |     | NULL    |                |
-+---------------+-------------+------+-----+---------+----------------+
-
+DROP TABLE user_master;
 INSERT INTO user_master (user_name, user_password, mobile_no, date_of_birth, address, city, state, pincode) VALUES ('user1', 'user1', '9054237213', '1998-10-20', '284 No, Bangur Avenue', 'Kolkata', 'West Bengal', '700055');
-
 SELECT * FROM user_master;
-+---------+-----------+---------------+------------+---------------+-----------------------+---------+------------+---------+
-| user_id | user_name | user_password | mobile_no  | date_of_birth | address               | city    | state      | pincode |
-+---------+-----------+---------------+------------+---------------+-----------------------+---------+------------+---------+
-|       1 | user1     | user1         | 9054237213 | 1998-10-20    | 284 No, Bangur Avenue | Kolkata | West Benga | 700055  |
-+---------+-----------+---------------+------------+---------------+-----------------------+---------+------------+---------+
 
 
 -------- Flight master --------------
 CREATE TABLE flight_master (
-    -> flight_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    -> flight_no INT,
-    -> flight_name VARCHAR(20),
-    -> from_city VARCHAR(20),
-    -> to_city VARCHAR(20),
-    -> date_of_flight DATE,
-    -> start_time TIME,
-    -> end_time TIME,
-    -> flight_duration TIME,
-    -> ticket_price DECIMAL(10,2),
-    -> total_seats INT,
-    -> available_seats INT
-    -> )ENGINE=INNODB;
-
+    flight_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    flight_no INT,
+    flight_name VARCHAR(20),
+    from_city VARCHAR(20),
+    to_city VARCHAR(20),
+    date_of_flight VARCHAR(15),
+    departure_time VARCHAR(15),
+    arrival_time VARCHAR(15),
+    flight_duration VARCHAR(15),
+    ticket_price FLOAT,
+    total_seats INT,
+    available_seats INT
+    ) ENGINE=INNODB;
 
 DESCRIBE flight_master;
-+-----------------+---------------+------+-----+---------+----------------+
-| Field           | Type          | Null | Key | Default | Extra          |
-+-----------------+---------------+------+-----+---------+----------------+
-| flight_id       | int(11)       | NO   | PRI | NULL    | auto_increment |
-| flight_no       | int(11)       | YES  |     | NULL    |                |
-| flight_name     | varchar(20)   | YES  |     | NULL    |                |
-| from_city       | varchar(20)   | YES  |     | NULL    |                |
-| to_city         | varchar(20)   | YES  |     | NULL    |                |
-| date_of_flight  | date          | YES  |     | NULL    |                |
-| start_time      | time          | YES  |     | NULL    |                |
-| end_time        | time          | YES  |     | NULL    |                |
-| flight_duration | time          | YES  |     | NULL    |                |
-| ticket_price    | decimal(10,2) | YES  |     | NULL    |                |
-| total_seats     | int(11)       | YES  |     | NULL    |                |
-| available_seats | int(11)       | YES  |     | NULL    |                |
-+-----------------+---------------+------+-----+---------+----------------+
+DROP TABLE flight_master;
 
-
-INSERT INTO flight_master (flight_no, flight_name, from_city, to_city, date_of_flight, start_time, end_time, flight_duration, ticket_price, total_seats, available_seats) VALUES (1001, 'Indigo', 'Kolkata', 'Mumbai', '2022-05-10', '13:15:00', '14:05:00', '00:55:00', 3450.00, 250, 100);
-INSERT INTO flight_master (flight_no, flight_name, from_city, to_city, date_of_flight, start_time, end_time, flight_duration, ticket_price, total_seats, available_seats) VALUES (1002, 'AirIndia', 'Delhi', 'Chennai', '2022-05-11', '13:15:00', '14:05:00', '00:55:00', 4410.23, 250, 30);
-INSERT INTO flight_master (flight_no, flight_name, from_city, to_city, date_of_flight, start_time, end_time, flight_duration, ticket_price, total_seats, available_seats) VALUES (1003, 'SpiceJet', 'Kolkata', 'Goa', '2022-05-12', '05:45:00', '08:50:00', '03:05:00', 6450.00, 300, 150);
-INSERT INTO flight_master (flight_no, flight_name, from_city, to_city, date_of_flight, start_time, end_time, flight_duration, ticket_price, total_seats, available_seats) VALUES (1004, 'Vistara', 'Mumbai', 'Bangalore', '2022-05-09', '12:15:00', '13:05:00', '00:55:00', 6110.00, 200, 80);
-
+INSERT INTO flight_master (flight_no, flight_name, from_city, to_city, date_of_flight, departure_time, arrival_time, flight_duration, ticket_price, total_seats, available_seats) VALUES (101, 'Indigo', 'Kolkata', 'Mumbai', '2022-05-10', '21:10:00', '23:45:00', '02:35:00', 3450.00, 250, 100);
+INSERT INTO flight_master (flight_no, flight_name, from_city, to_city, date_of_flight, departure_time, arrival_time, flight_duration, ticket_price, total_seats, available_seats) VALUES (102, 'AirIndia', 'Delhi', 'Chennai', '2022-05-11', '21:10:00', '23:45:00', '02:35:00', 4410.23, 250, 30);
+INSERT INTO flight_master (flight_no, flight_name, from_city, to_city, date_of_flight, departure_time, arrival_time, flight_duration, ticket_price, total_seats, available_seats) VALUES (103, 'SpiceJet', 'Kolkata', 'Goa', '2022-05-12', '21:10:00', '23:45:00', '02:35:00', 6450.00, 300, 150);
+INSERT INTO flight_master (flight_no, flight_name, from_city, to_city, date_of_flight, departure_time, arrival_time, flight_duration, ticket_price, total_seats, available_seats) VALUES (104, 'Vistara', 'Mumbai', 'Bangalore', '2022-05-09', '21:10:00', '23:45:00', '02:35:00', 6110.00, 200, 80);
 SELECT * FROM flight_master;
-+-----------+-----------+-------------+-----------+-----------+----------------+------------+----------+-----------------+--------------+-------------+-----------------+
-| flight_id | flight_no | flight_name | from_city | to_city   | date_of_flight | start_time | end_time | flight_duration | ticket_price | total_seats | available_seats |
-+-----------+-----------+-------------+-----------+-----------+----------------+------------+----------+-----------------+--------------+-------------+-----------------+
-|         1 |      1001 | Indigo      | Kolkata   | Mumbai    | 2022-05-10     | 13:15:00   | 14:05:00 | 00:55:00        |      3450.00 |         250 |             100 |
-|         2 |      1002 | AirIndia    | Delhi     | Chennai   | 2022-05-11     | 13:15:00   | 14:05:00 | 00:55:00        |      4410.23 |         250 |              30 |
-|         3 |      1003 | SpiceJet    | Kolkata   | Goa       | 2022-05-12     | 05:45:00   | 08:50:00 | 03:05:00        |      6450.00 |         300 |             150 |
-|         4 |      1004 | Vistara     | Mumbai    | Bangalore | 2022-05-09     | 12:15:00   | 13:05:00 | 00:55:00        |      6110.00 |         200 |              80 |
-+-----------+-----------+-------------+-----------+-----------+----------------+------------+----------+-----------------+--------------+-------------+-----------------+
 
 
 -------- Booking master --------------
 CREATE TABLE booking_master (
-    -> booking_id INT AUTO_INCREMENT PRIMARY KEY,
-    -> ticket_id VARCHAR(20),
-    -> user_id INT,
-    -> flight_id INT,
-    -> date_of_booking DATE,
-    -> no_of_passengers INT,
-    -> total_cost DECIMAL(10,2),
-    ->
-    -> FOREIGN KEY (user_id) REFERENCES user_master (user_id),
-    -> FOREIGN KEY (flight_id) REFERENCES flight_master (flight_id)
-    -> )ENGINE=INNODB;
+    booking_id INT AUTO_INCREMENT PRIMARY KEY,
+    ticket_id VARCHAR(20),
+    user_id INT,
+    flight_id INT,
+    date_of_booking VARCHAR(10),
+    no_of_passengers INT,
+    total_cost FLOAT,
 
+    FOREIGN KEY (user_id) REFERENCES user_master (user_id),
+    FOREIGN KEY (flight_id) REFERENCES flight_master (flight_id)
+    ) ENGINE=INNODB;
 
 
 DESCRIBE booking_master;
-+------------------+---------------+------+-----+---------+----------------+
-| Field            | Type          | Null | Key | Default | Extra          |
-+------------------+---------------+------+-----+---------+----------------+
-| booking_id       | int(11)       | NO   | PRI | NULL    | auto_increment |
-| ticket_id        | varchar(20)   | YES  |     | NULL    |                |
-| user_id          | int(11)       | YES  | MUL | NULL    |                |
-| flight_id        | int(11)       | YES  | MUL | NULL    |                |
-| date_of_booking  | date          | YES  |     | NULL    |                |
-| no_of_passengers | int(11)       | YES  |     | NULL    |                |
-| total_cost       | decimal(10,2) | YES  |     | NULL    |                |
-+------------------+---------------+------+-----+---------+----------------+
+DROP TABLE booking_master;

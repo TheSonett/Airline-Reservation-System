@@ -1,28 +1,26 @@
 package mvc.model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 
-public class flightMaster {
+public class FlightMaster {
     private int flight_no;
     private String flight_name;
     private String from_city;
     private String to_city;
-    private Date date_of_flight;
-    private Time departure_time;
-    private Time arrival_time;
-    private Time flight_duration;
-    private double ticket_price;
+    private String date_of_flight;
+    private String departure_time;
+    private String arrival_time;
+    private String flight_duration;
+    private float ticket_price;
     private int total_seats;
     private int available_seats;
   
     private String status;
     
-    public flightMaster() {
+    public FlightMaster() {
         
     }
     
@@ -33,9 +31,7 @@ public class flightMaster {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3308/AirlineServer","root","");
             statement = connection.createStatement();
-            String query = "INSERT INTO flight_master "
-                        + "(flight_no, flight_name, from_city, to_city, date_of_flight, start_time, end_time, flight_duration, ticket_price, total_seats, available_seats)"
-                        + "VALUES ("+ flight_no +", '" + flight_name + "', '" + from_city + "', '" + to_city + "', '" + date_of_flight + "', '" + departure_time + "', '" + arrival_time + "', '" + flight_duration + "', " + ticket_price + ", " + total_seats + ", " + available_seats + ");";
+            String query = "INSERT INTO flight_master (flight_no, flight_name, from_city, to_city, date_of_flight, departure_time, arrival_time, flight_duration, ticket_price, total_seats, available_seats) VALUES ("+ flight_no +", '" + flight_name + "', '" + from_city + "', '" + to_city + "', '" + date_of_flight + "', '" + departure_time + "', '" + arrival_time + "', '" + flight_duration + "', " + ticket_price + ", " + total_seats + ", " + available_seats + ");";
             statement.executeUpdate(query);
             connection.close();
             return true;
@@ -87,43 +83,43 @@ public class flightMaster {
         this.to_city = to_city;
     }
 
-    public Date getDate_of_flight() {
+    public String getDate_of_flight() {
         return date_of_flight;
     }
 
-    public void setDate_of_flight(Date date_of_flight) {
+    public void setDate_of_flight(String date_of_flight) {
         this.date_of_flight = date_of_flight;
     }
 
-    public Time getDeparture_time() {
+    public String getDeparture_time() {
         return departure_time;
     }
 
-    public void setDeparture_time(Time departure_time) {
+    public void setDeparture_time(String departure_time) {
         this.departure_time = departure_time;
     }
 
-    public Time getArrival_time() {
+    public String getArrival_time() {
         return arrival_time;
     }
 
-    public void setArrival_time(Time arrival_time) {
+    public void setArrival_time(String arrival_time) {
         this.arrival_time = arrival_time;
     }
 
-    public Time getFlight_duration() {
+    public String getFlight_duration() {
         return flight_duration;
     }
 
-    public void setFlight_duration(Time flight_duration) {
+    public void setFlight_duration(String flight_duration) {
         this.flight_duration = flight_duration;
     }
 
-    public double getTicket_price() {
+    public float getTicket_price() {
         return ticket_price;
     }
 
-    public void setTicket_price(double ticket_price) {
+    public void setTicket_price(float ticket_price) {
         this.ticket_price = ticket_price;
     }
 

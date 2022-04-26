@@ -50,5 +50,6 @@
         <form action="addFlights.jsp", method="post">
             <input type="submit" name="resetButton" value="Reset">
         </form>
+        <a href="showFlights.jsp">See records</a>
     </body>
 </html>

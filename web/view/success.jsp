@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>Data inserted!!!</h1>
+        <a href="view/showFlights.jsp">See records</a>
     </body>
 </html>

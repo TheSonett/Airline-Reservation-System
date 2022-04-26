@@ -97,19 +97,16 @@ public class FlightMasterServlet extends HttpServlet {
             flightObj.setAvailable_seats(available_seats);
             
             
-            
             boolean result = flightObj.isFlightAdded();
             if(result) {
                 RequestDispatcher rd = request.getRequestDispatcher("view/success.jsp");
                 rd.forward(request, response);
-                //out.print("Record inserted!!!");
-                
             } else {
                 RequestDispatcher rd = request.getRequestDispatcher("view/error.jsp");
                 rd.forward(request, response);
             }
             
-        } catch(IOException | NumberFormatException | ServletException ex) {
+        } catch(NumberFormatException ex) {
             System.out.println("Exception occured inside doPost() method in flightMaterServlet.java file!!: " + ex.getMessage());
         }
         

@@ -5,6 +5,7 @@
 package mvc.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,16 +60,24 @@ public class FlightMasterServlet extends HttpServlet {
         doGet(request, response);
         response.setContentType("text/html");
         
+        PrintWriter out = response.getWriter();
         
         // My Code Below
         try {
             int flight_no = Integer.parseInt(request.getParameter("flight_no"));
-            String flight_name = request.getParameter("flight_name");
-            String from_city = request.getParameter("from_city");
-            String to_city = request.getParameter("to_city");
+            
+            String flightFullName = request.getParameter("flight_name");
+            String flight_name = flightFullName.substring(0,1).toUpperCase() + flightFullName.substring(1);
+            
+            String fromCityFullName = request.getParameter("from_city");
+            String from_city = fromCityFullName.substring(0,1).toUpperCase() + fromCityFullName.substring(1);
+            
+            String toCityFullName = request.getParameter("to_city");
+            String to_city = toCityFullName.substring(0,1).toUpperCase() + toCityFullName.substring(1);
+            
             String date_of_flight = request.getParameter("date_of_flight");
-            String departure_time = request.getParameter("departure_time");
-            String arrival_time = request.getParameter("arrival_time");
+            String departure_time = request.getParameter("departure_timing");
+            String arrival_time = request.getParameter("arrival_timing");
             String flight_duration = request.getParameter("flight_duration");
             float ticket_price = Float.parseFloat(request.getParameter("ticket_price"));
             int total_seats = Integer.parseInt(request.getParameter("total_seats"));
@@ -87,10 +96,14 @@ public class FlightMasterServlet extends HttpServlet {
             flightObj.setTotal_seats(total_seats);
             flightObj.setAvailable_seats(available_seats);
             
+            
+            
             boolean result = flightObj.isFlightAdded();
             if(result) {
                 RequestDispatcher rd = request.getRequestDispatcher("view/success.jsp");
                 rd.forward(request, response);
+                //out.print("Record inserted!!!");
+                
             } else {
                 RequestDispatcher rd = request.getRequestDispatcher("view/error.jsp");
                 rd.forward(request, response);

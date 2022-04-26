@@ -13,7 +13,6 @@
     </head>
     <body>
         <h1>Add New Flights</h1><br><br>
-        
         <form action="../FlightMasterServlet", method="post">
             Flight No: <input type="text" name="flight_no"><br><br>
             Flight Name: <select type="text" name="flight_name">

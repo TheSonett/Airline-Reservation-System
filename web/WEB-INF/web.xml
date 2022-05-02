@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>flightMasterServlet</servlet-name>
-        <servlet-class>mvc.controller.FlightMasterServlet</servlet-class>
+        <servlet-name>search_flight_by_id</servlet-name>
+        <servlet-class>Servelet.search_flight_by_id</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>search_flight_by_no</servlet-name>
+        <servlet-class>Servelet.search_flight_by_no</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>search_flight_by_fno</servlet-name>
+        <servlet-class>Servelet.search_flight_by_fno</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>search_flight_by_citys</servlet-name>
+        <servlet-class>Servelet.search_flight_by_citys</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>flightMasterServlet</servlet-name>
-        <url-pattern>/flightMasterServlet</url-pattern>
+        <servlet-name>search_flight_by_id</servlet-name>
+        <url-pattern>/search_flight_by_id</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>search_flight_by_no</servlet-name>
+        <url-pattern>/search_flight_by_no</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>search_flight_by_fno</servlet-name>
+        <url-pattern>/search_flight_by_fno</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>search_flight_by_citys</servlet-name>
+        <url-pattern>/search_flight_by_citys</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
